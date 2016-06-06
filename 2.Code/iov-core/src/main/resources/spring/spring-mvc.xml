@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context-4.2.xsd  
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<!-- 注解扫描包 整包扫描 -->
+	<context:component-scan base-package="com.zbmatsu.iov" />
+
+	<!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+    
+    <!-- 时间类型转换器 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
+        <property name="converters">    
+            <list>    
+                <bean class="com.zbmatsu.iov.common.util.DateConver" />    
+            </list>    
+        </property>    
+    </bean>
+
+    <!-- 返回json 方法一 需要导入 fastjson.jar包 -->
+	<mvc:annotation-driven conversion-service="conversionService">
+		<mvc:message-converters register-defaults="false">
+			<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+			<bean id="fastJsonHttpMessageConverter"
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<!-- 这里顺序不能反，一定先写text/html,不然ie下出现下载提示 -->
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+
+				<property name="features">
+                    <list>
+                        <value>WriteMapNullValue</value>
+                        <value>QuoteFieldNames</value>
+                        <value>WriteDateUseDateFormat</value>
+                    </list>
+                </property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<mvc:cors>
+		<mvc:mapping path="/**"
+			 allowed-origins="*"
+			 allowed-methods="GET,PUT,DELETE,POST,OPTIONS"
+			 allowed-headers="*"
+			 max-age="1300" />
+	</mvc:cors>
+	
+</beans>  

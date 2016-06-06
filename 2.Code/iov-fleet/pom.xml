@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>iov-fleet</artifactId>
+	<packaging>war</packaging>
+	<name>iov-fleet Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- 父工程 -->
+	<parent>
+		<groupId>com.zbmatsu.iov</groupId>
+		<artifactId>iov-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../iov-parent</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-dao</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>iov-fleet</finalName>
+		<!-- 使用的是overlays选项，但是只有一个maven项目的web.xml会最终生效 所以其他的maven项目中可以不放web.xml -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

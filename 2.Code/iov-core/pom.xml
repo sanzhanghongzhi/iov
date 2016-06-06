@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>iov-core</artifactId>
+	<packaging>war</packaging>
+	<name>iov-core Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- 父工程 -->
+	<parent>
+		<groupId>com.zbmatsu.iov</groupId>
+		<artifactId>iov-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../iov-parent</relativePath>
+	</parent>
+
+	<properties>
+		<iov.version>0.0.1-SNAPSHOT</iov.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- 待聚合模块 -->
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-fleet</artifactId>
+			<version>${iov.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-vehicle</artifactId>
+			<version>${iov.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-report</artifactId>
+			<version>${iov.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-ws</artifactId>
+			<version>${iov.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-enterprise</artifactId>
+			<version>${iov.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<!-- 依赖包 -->
+		
+		<!-- servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		
+		<!-- alibaba -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<finalName>iov</finalName>
+		<plugins>
+			<!-- 合并多个war -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+					<overlays>
+						<overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-fleet</artifactId>
+						</overlay>
+						<!-- <overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-dao</artifactId>
+						</overlay> -->
+						<overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-vehicle</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-report</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-ws</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>com.zbmatsu.iov</groupId>
+							<artifactId>iov-enterprise</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			
+			<!-- maven打包后自动启动tomcat服务，加载 iov-core war包 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

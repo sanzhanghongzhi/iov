@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>iov-dao</artifactId>
+	<packaging>jar</packaging>
+	<name>iov-dao</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- 父工程 -->
+	<parent>
+		<groupId>com.zbmatsu.iov</groupId>
+		<artifactId>iov-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../iov-parent</relativePath>
+	</parent>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<!-- iov-common -->
+		<dependency>
+			<groupId>com.zbmatsu.iov</groupId>
+			<artifactId>iov-common</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>iov-dao</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
