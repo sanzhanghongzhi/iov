@@ -2,9 +2,9 @@
 <configuration scan="true">
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>../logs/iov.log</file>
+		<file>../logs/iov-dao.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>../logs/iov-%d{yyyy-MM-dd}.gz</FileNamePattern>
+			<FileNamePattern>../logs/iov-dao-%d{yyyy-MM-dd}.gz</FileNamePattern>
 			<MaxHistory>60</MaxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

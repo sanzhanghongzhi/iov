@@ -1,10 +1,13 @@
 package com.zbmatsu.iov.core.service;
 
 import java.util.List;
-import java.util.Map;
+
+import com.zbmatsu.iov.common.web.ServiceContext;
+import com.zbmatsu.iov.dao.commom.InputParameter;
 
 public interface IMenuService {
 
-	public List<Map<String, Object>> getMenuList();
+	public ServiceContext getMenuList(List<InputParameter> list);
 	
+	public ServiceContext addMenu(List<InputParameter> list);
 }

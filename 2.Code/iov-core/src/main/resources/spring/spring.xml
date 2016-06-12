@@ -9,7 +9,7 @@
 
     <!-- 注解扫描包 整包扫描 -->
 	<context:component-scan base-package="com.zbmatsu.iov">  
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />    
+        <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> -->    
     </context:component-scan> 
 	<!-- 引入属性文件 -->
 	<beans profile="develop">

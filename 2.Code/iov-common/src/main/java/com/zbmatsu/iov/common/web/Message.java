@@ -7,7 +7,7 @@ package com.zbmatsu.iov.common.web;
  */
 public class Message {
 
-	public static final String OK = "ok";
+	public static final String OK = "0";
 	
 	/**
 	 * 错误码
@@ -16,11 +16,11 @@ public class Message {
 	/**
 	 * 错误信息
 	 */
-	private String errMessage = "";
+	private String errMsg = "";
 	/**
 	 * 数据对象
 	 */
-	private Object datas;
+	private MessageDatas datas = new MessageDatas();
 
 	public String getErrCode() {
 		return errCode;
@@ -30,22 +30,20 @@ public class Message {
 		this.errCode = errCode;
 	}
 
-	public String getErrMessage() {
-		return errMessage;
+	public String getErrMsg() {
+		return errMsg;
 	}
 
-	public void setErrMessage(String errMessage) {
-		this.errMessage = errMessage;
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
 	}
 
-	public Object getDatas() {
-		if (datas == null) {
-			datas = new Object[] {};
-		}
+	public MessageDatas getDatas() {
+		
 		return datas;
 	}
 
-	public void setDatas(Object datas) {
+	public void setDatas(MessageDatas datas) {
 		this.datas = datas;
 	}
 }

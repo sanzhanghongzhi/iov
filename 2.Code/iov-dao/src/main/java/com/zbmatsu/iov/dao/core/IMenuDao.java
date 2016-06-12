@@ -1,9 +1,24 @@
 package com.zbmatsu.iov.dao.core;
 
 import java.util.List;
-import java.util.Map;
 
-public interface IMenuDao {
+import com.zbmatsu.iov.common.web.ServiceContext;
+import com.zbmatsu.iov.dao.commom.InputParameter;
 
-	public List<Map<String, Object>> getAll();
+public interface IMenuDao{
+	
+	/**
+	 * get all
+	 * @param list
+	 * @return
+	 */
+	public ServiceContext getMenuList(List<InputParameter> list);
+	
+	/**
+	 * add
+	 * @param list
+	 * @return
+	 */
+	public ServiceContext addMenu(List<InputParameter> list);
+	
 }

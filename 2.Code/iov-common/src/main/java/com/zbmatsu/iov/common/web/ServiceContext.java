@@ -1,8 +1,6 @@
 package com.zbmatsu.iov.common.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 请求上下文
@@ -11,51 +9,12 @@ import java.util.Map;
  */
 public class ServiceContext {
 	
-	private Map<String, Object> params = new HashMap<String, Object>();
 
 	private Message message = new Message();
 	
-	public Map<String, Object> getParams() {
-		return params;
-	}
+	private MessageDatas messageDatas = new MessageDatas();
 	
-	/**
-	 * 存放参数
-	 * 
-	 * @param name
-	 * @param value
-	 */
-	public void putParam(String name, Object value) {
-		params.put(name, value);
-	}
 
-	/**
-	 * 获取参数值
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public Object getParam(String name) {
-		return params.get(name);
-	}
-
-	/**
-	 * 获取返回值
-	 * 
-	 * @return
-	 */
-	public Object returnValue() {
-		return message.getDatas();
-	}
-
-	/**
-	 * 获取返回报文
-	 * 
-	 * @return
-	 */
-	public Message returnMessage() {
-		return message;
-	}
 
 	/**
 	 * 设置返回值
@@ -63,9 +22,8 @@ public class ServiceContext {
 	 * @param value
 	 */
 	public void setReturnObject(Object value) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("obj", value);
-		message.setDatas(map);
+		messageDatas.setObj(value);
+		message.setDatas(messageDatas);
 	}
 	
 	/**
@@ -74,10 +32,9 @@ public class ServiceContext {
 	 * @param value
 	 */
 	public void setReturnList(List<?> value, Pagination pagination) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("list", value);
-		message.setDatas(map);
+		messageDatas.setPagination(pagination);
+		messageDatas.setList(value);
+		message.setDatas(messageDatas);
 	}
 	
 	/**
@@ -86,9 +43,18 @@ public class ServiceContext {
 	 * @param value
 	 */
 	public void setReturnList(List<?> value) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", value);
-		message.setDatas(map);
+		messageDatas.setList(value);
+		message.setDatas(messageDatas);
+	}
+	
+	/**
+	 * 设置返回值
+	 * 
+	 * @param value
+	 */
+	public void setReturnList(Pagination pagination) {
+		messageDatas.setPagination(pagination);
+		message.setDatas(messageDatas);
 	}
 
 	/**
@@ -106,9 +72,54 @@ public class ServiceContext {
 	 * @param errCode
 	 * @param errDesc
 	 */
-	public void setMessage(String errCode, String errDesc) {
-		message.setErrMessage(errDesc);
+	public void setMessage(String errCode, String errMsg) {
 		message.setErrCode(errCode);
+		message.setErrMsg(errMsg);
+	}
+	
+	/**********************************get method**************************/
+	
+	/**
+	 * 获取返回报文
+	 * 
+	 * @return
+	 */
+	public Message returnMessage() {
+		return message;
+	}
+	
+	
+	/**
+	 * 获取errCode
+	 * @return
+	 */
+	public String getErrCode(){
+		return message.getErrCode();
+	}
+	
+	
+	/**
+	 * 获取errMsg
+	 * @return
+	 */
+	public String getErrMsg(){
+		return message.getErrMsg();
+	}
+	
+	/**
+	 * 获取obj对象
+	 * @return
+	 */
+	public Object getObj(){
+		return messageDatas.getObj();
+	}
+	
+	/**
+	 * 获取list对象
+	 * @return
+	 */
+	public List<?> getList(){
+		return messageDatas.getList();
 	}
 }
 
