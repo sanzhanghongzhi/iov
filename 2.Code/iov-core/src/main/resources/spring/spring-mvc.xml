@@ -12,7 +12,9 @@
       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
 	<!-- 注解扫描包 整包扫描 -->
-	<context:component-scan base-package="com.zbmatsu.iov" />
+	<context:component-scan base-package="com.zbmatsu.iov" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 
 	<!-- 启用spring mvc 注解 -->
     <context:annotation-config />

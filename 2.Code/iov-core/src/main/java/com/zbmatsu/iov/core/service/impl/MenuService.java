@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zbmatsu.iov.common.web.ServiceContext;
 import com.zbmatsu.iov.core.exception.IovServiceException;
@@ -24,6 +25,7 @@ public class MenuService implements IMenuService{
 		return menuDao.getMenuList(list);
 	}
 
+	@Transactional
 	@Override
 	public ServiceContext addMenu(List<InputParameter> list) {
 		
@@ -31,6 +33,7 @@ public class MenuService implements IMenuService{
 			
 		try {
 			serviceContext = menuDao.addMenu(list);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IovServiceException("add menu error");
