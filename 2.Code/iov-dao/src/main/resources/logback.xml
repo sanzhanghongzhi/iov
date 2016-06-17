@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <configuration scan="true">
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -11,12 +12,12 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
 	</appender>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
 	</appender>
 	
