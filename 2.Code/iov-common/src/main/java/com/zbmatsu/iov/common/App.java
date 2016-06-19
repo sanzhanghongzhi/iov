@@ -11,6 +11,7 @@ public class App
         System.out.println( "Hello World!" );
         System.out.println("hehe");
         System.out.println("hehe1");
+        System.out.println("hehe2");
     }
     
     public static String getStr(){
