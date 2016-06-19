@@ -10,6 +10,7 @@ public class App
     {
         System.out.println( "Hello World!" );
         System.out.println("hehe");
+        System.out.println("hehe1");
     }
     
     public static String getStr(){
