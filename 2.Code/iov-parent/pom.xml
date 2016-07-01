@@ -38,6 +38,7 @@
 
 		<!-- json -->
 		<jackson.version>2.6.5</jackson.version>
+		<jackson_mapper.version>1.9.13</jackson_mapper.version>
 		<fastjson.version>1.2.7</fastjson.version>
 		<!-- Log libs -->
 		<slf4j.version>1.7.12</slf4j.version>
@@ -117,6 +118,13 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
+			</dependency>
+			
+			<!-- 使用 Jackson 把 Java 对象转换成 JSON 字串 -->
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson_mapper.version}</version>
 			</dependency>
 			
 			<!-- 使用 Jackson -->

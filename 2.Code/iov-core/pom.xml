@@ -86,10 +86,6 @@
 							<groupId>com.zbmatsu.iov</groupId>
 							<artifactId>iov-fleet</artifactId>
 						</overlay>
-						<!-- <overlay>
-							<groupId>com.zbmatsu.iov</groupId>
-							<artifactId>iov-dao</artifactId>
-						</overlay> -->
 						<overlay>
 							<groupId>com.zbmatsu.iov</groupId>
 							<artifactId>iov-vehicle</artifactId>
@@ -115,7 +111,7 @@
 			</plugin>
 			
 			<!-- maven打包后自动启动tomcat服务，加载 iov-core war包 -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
@@ -127,7 +123,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>
