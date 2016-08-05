@@ -1,7 +1,7 @@
 package com.zbmatsu.iov.core.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.zbmatsu.iov.common.web.BaseController;
 import com.zbmatsu.iov.common.web.Message;
 import com.zbmatsu.iov.common.web.ServiceContext;
 import com.zbmatsu.iov.core.service.IMenuService;
-import com.zbmatsu.iov.dao.commom.InputParameter;
 
 
 @Controller
@@ -33,7 +34,9 @@ public class MenuController extends BaseController{
 		
 		logger.info("enter controller /Menu index...");
 		
-		ServiceContext serviceContext = menuService.getMenuList(null);
+		ServiceContext serviceContext = new ServiceContext();
+		
+		menuService.getMenuList(serviceContext);
 		
 		return serviceContext.returnMessage();
 	}
@@ -44,24 +47,16 @@ public class MenuController extends BaseController{
 		
 		logger.info("enter controller /Menu add...");
 		
-		List<InputParameter> list = new ArrayList<InputParameter>();
-		list.add(new InputParameter(1,String.class,"128"));
-		list.add(new InputParameter(2,String.class,"menuname"));
-		list.add(new InputParameter(3,String.class,"2"));
-		list.add(new InputParameter(4,String.class,"jjj/index"));
-		list.add(new InputParameter(5,String.class,"124"));
-		list.add(new InputParameter(6,String.class,"desc"));
-		list.add(new InputParameter(7,String.class,"uuu/add.png"));
-		list.add(new InputParameter(8,Integer.class,7));
-		list.add(new InputParameter(9,String.class,"1"));
+		String uuid = UUID.randomUUID().toString();
 		
+		String str = "{\"id\":\"" + uuid + "\",\"name\":\"menuname\",\"type\":\"2\",\"url\":\"url\",\"parentId\":\"124\",\"desc\":\"desc\",\"icon\":\"uuud.png\",\"sort\":7,\"status\":\"1\"}";
+		
+		JSONObject jsonObject = JSON.parseObject(str);
 		
 		ServiceContext serviceContext = new ServiceContext();
-		try {
-			serviceContext = menuService.addMenu(list);
-		}catch (Exception e){
-			serviceContext.setMessage("1", e.getMessage());
-		}
+		serviceContext.setParams("params", jsonObject);
+		
+		menuService.addMenu(serviceContext);
 		
 		return serviceContext.returnMessage();
 	}

@@ -4,7 +4,7 @@ create or replace function common_get_ret_json(err_code varchar, err_msg varchar
 declare ret_json json;
 begin
 	
-	select "row_to_json"(result) into ret_json from (select err_code, err_msg, ret_obj as obj, ret_list as list) as result;
+	select "row_to_json"(result) into ret_json from (select err_code, err_msg, ret_obj as object, ret_list as list) as result;
 	return ret_json;
 end; 
 $$
@@ -40,7 +40,7 @@ $$
 language 'plpgsql' stable;
 
 --根据ID 查询菜单
-create or replace function menu_get_by_id(menu_id varchar) returns json as $$
+create or replace function menu_get_by_id(json_params json) returns json as $$
 
 declare ret_json json;
 
@@ -66,7 +66,7 @@ begin
 			url,
 			parent_id,
 			icon_image
-		from iov_menu where id = $1) as result;
+		from iov_menu where id = $1 ->>'id') as result;
 	
 	ret_json := common_get_ret_json(err_code, err_msg, ret_obj, ret_list);
 	
@@ -76,8 +76,7 @@ $$
 language 'plpgsql' stable;
 
 --新增菜单
-create or replace function menu_add(id varchar, menu_name varchar, menu_type varchar, url varchar, 
-	parent_id varchar, menu_desc varchar, icon_image varchar, menu_sort int, status varchar) returns json as $$
+create or replace function menu_add(json_params json) returns json as $$
 
 declare ret_json json;
 
@@ -94,15 +93,15 @@ begin
 	
 	insert into
 		iov_menu 
-		values(id, 
-			menu_name, 
-			menu_type, 
-			url, 
-			parent_id, 
-			menu_desc, 
-			icon_image, 
-			menu_sort, 
-			status);
+		values($1 ->>'id', 
+			$1 ->>'name', 
+			$1 ->>'type', 
+			$1 ->>'url', 
+			$1 ->>'parentId', 
+			$1 ->>'desc', 
+			$1 ->>'icon', 
+			cast($1 ->>'sort' as integer ), 
+			$1 ->>'status');
 		
 	ret_json := common_get_ret_json(err_code, err_msg, ret_obj, ret_list);
 	

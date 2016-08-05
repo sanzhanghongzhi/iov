@@ -1,45 +1,37 @@
 package com.zbmatsu.iov.core.service.impl;
 
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zbmatsu.iov.common.web.ServiceContext;
-import com.zbmatsu.iov.core.exception.IovServiceException;
 import com.zbmatsu.iov.core.service.IMenuService;
-import com.zbmatsu.iov.dao.commom.InputParameter;
-import com.zbmatsu.iov.dao.core.IMenuDao;
+import com.zbmatsu.iov.dao.commom.ProductNameEnum;
+import com.zbmatsu.iov.dao.commom.ProductResult;
 
 @Service("menuService")
-public class MenuService implements IMenuService{
+public class MenuService extends BaseService implements IMenuService{
 
-	@Autowired
-	protected IMenuDao menuDao;
 	
-
 	@Override
-	public ServiceContext getMenuList(List<InputParameter> list) {
+	public boolean getMenuList(ServiceContext serviceContext) {
 		
-		return menuDao.getMenuList(list);
+		ProductResult result = baseDao.callPostgresqlFunction(ProductNameEnum.MENU_GET, null);
+		
+		serviceContext.setReturnList(result.getList());
+		
+		return true;
 	}
 
 	@Transactional
 	@Override
-	public ServiceContext addMenu(List<InputParameter> list) {
+	public boolean addMenu(ServiceContext serviceContext) {
 		
-		ServiceContext serviceContext = new ServiceContext();
-			
-		try {
-			serviceContext = menuDao.addMenu(list);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IovServiceException("add menu error");
-		}
+		JSONObject jsonObject = (JSONObject)serviceContext.getParam("params");
 		
-		return serviceContext;
+		baseDao.callPostgresqlFunction(ProductNameEnum.MENU_ADD, jsonObject);
+		return true;
 	}
-
+		
 }

@@ -62,4 +62,14 @@
 			 max-age="1300" />
 	</mvc:cors>
 	
+	
+	<!-- spring读取properties文件  @Value 读取-->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/config/application.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8"/>
+	</bean>
 </beans>  

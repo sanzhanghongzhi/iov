@@ -58,4 +58,7 @@
  	
  	<!-- 配置基于注解的声明式 事物 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- aop 切面注解配置 -->
+	<aop:aspectj-autoproxy/>
 </beans>
