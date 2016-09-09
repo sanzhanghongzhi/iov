@@ -1,5 +1,6 @@
 package com.zbmatsu.iov.common.web;
 
+
 /**
  * 
  * @author zhangbei
@@ -20,7 +21,7 @@ public class Message {
 	/**
 	 * 数据对象
 	 */
-	private MessageDatas datas = new MessageDatas();
+	private Object result = new Object();
 
 	public String getErrCode() {
 		return errCode;
@@ -38,12 +39,13 @@ public class Message {
 		this.errMsg = errMsg;
 	}
 
-	public MessageDatas getDatas() {
-		
-		return datas;
+	public Object getResult() {
+		return result;
 	}
 
-	public void setDatas(MessageDatas datas) {
-		this.datas = datas;
+	public void setResult(Object result) {
+		this.result = result;
 	}
+
+	
 }

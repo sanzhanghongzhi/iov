@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.zbmatsu.iov.common.enums.ProductNameEnum;
 import com.zbmatsu.iov.common.web.BaseController;
 import com.zbmatsu.iov.common.web.Message;
-import com.zbmatsu.iov.common.web.ServiceContext;
-import com.zbmatsu.iov.core.service.IMenuService;
 
 
 @Controller
@@ -27,18 +26,19 @@ public class MenuController extends BaseController{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	protected IMenuService menuService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Message index(){
 		
+		Message message = new Message();
+		
 		logger.info("enter controller /Menu index...");
 		
-		ServiceContext serviceContext = new ServiceContext();
+		Object result = requestPGFunc(ProductNameEnum.MENU_GET, null);
 		
-		menuService.getMenuList(serviceContext);
+		message.setResult(result);
 		
-		return serviceContext.returnMessage();
+		return message;
 	}
 	
 	
@@ -53,11 +53,11 @@ public class MenuController extends BaseController{
 		
 		JSONObject jsonObject = JSON.parseObject(str);
 		
-		ServiceContext serviceContext = new ServiceContext();
-		serviceContext.setParams("params", jsonObject);
+		Object result = requestPGFunc(ProductNameEnum.MENU_ADD, jsonObject);
 		
-		menuService.addMenu(serviceContext);
+		Message message = new Message();
+		message.setResult(result);
 		
-		return serviceContext.returnMessage();
+		return message;
 	}
 }
