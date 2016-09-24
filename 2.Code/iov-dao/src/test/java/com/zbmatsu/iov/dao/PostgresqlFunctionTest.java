@@ -13,7 +13,7 @@ public class PostgresqlFunctionTest {
 
 	
 	/**
-	 * main method
+	 * main method  
 	 * @param args
 	 */
 	public static void main(String[] args) {
